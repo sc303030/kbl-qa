@@ -1,0 +1,50 @@
+name: Run Selenium Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r web/requirements.txt
+
+      - name: Install Chrome
+        run: |
+          set -ex
+          sudo apt-get update -y
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb  
+          sudo apt-get install -y -f
+
+      - name: Setup ChromeDriver
+        run: |
+          wget https://storage.googleapis.com/chrome-for-testing-public/133.0.6835.3/linux64/chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
+          sudo mv ./chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Setup Xvfb
+        run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1024x768x24 &
+          export DISPLAY=:99
+
+      - name: Run Selenium Tests
+        run: |
+          python web/home_002.py
