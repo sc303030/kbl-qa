@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv()
 
 
-class Base(unittest.TestCase):
+class BaseTest(unittest.TestCase):
     IMPLICIT_WAIT_TIME = 10
     TIMEOUT = 30
 
@@ -28,8 +28,7 @@ class Base(unittest.TestCase):
         self.driver = webdriver.Remote(
             url, options=UiAutomator2Options().load_capabilities(desired_caps)
         )
-        self.driver.implicitly_wait(self.IMPLICIT_WAIT_TIME)
-        self.timeout = self.TIMEOUT
 
     def tearDown(self):
-        self.driver.quit()
+        if self.driver:
+            self.driver.quit()

@@ -2,7 +2,7 @@ import unittest
 from selenium import webdriver
 
 
-class Base(unittest.TestCase):
+class BaseTest(unittest.TestCase):
     KBL_DOMAIN = "https://www.kbl.or.kr/"
     IMPLICIT_WAIT_TIME = 3
 
