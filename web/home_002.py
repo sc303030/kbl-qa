@@ -1,4 +1,4 @@
-from base import Base
+from base_test import BaseTest
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import unittest
@@ -11,7 +11,7 @@ Then: 티켓예매, 프리뷰, Challenge 3가지 버튼이 정상적으로 보�
 """
 
 
-class Home002(Base):
+class Home002(BaseTest):
     def event(self):
         self.driver.get(self.kbl_domain)
         schedule_card_elements = self.driver.find_element(
