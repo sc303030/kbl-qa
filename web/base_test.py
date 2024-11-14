@@ -1,5 +1,9 @@
 import unittest
 from selenium import webdriver
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class BaseTest(unittest.TestCase):
@@ -10,6 +14,13 @@ class BaseTest(unittest.TestCase):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
         options.add_argument("--start-maximized")
+
+        env = os.getenv("ENV")
+        if env == "production":
+            options.add_argument("--headless")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--user-data-dir=/tmp/selenium/user-data-dir")
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.start_client()
