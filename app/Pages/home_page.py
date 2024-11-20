@@ -1,5 +1,5 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from base_page import BasePage
+from app.Pages.base_page import BasePage
 
 
 class HomePage(BasePage):

@@ -1,8 +1,8 @@
 import time
 import unittest
 
-from home_page import HomePage
-from base_test import BaseTest
+from app.Pages.home_page import HomePage
+from app.TestBase.base_test import BaseTest
 
 
 class TestMain(BaseTest):
