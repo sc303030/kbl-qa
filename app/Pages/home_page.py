@@ -3,25 +3,13 @@ from app.Pages.base_page import BasePage
 
 
 class HomePage(BasePage):
-    button_1 = (AppiumBy.ACCESSIBILITY_ID, "button_1")
-    button_1_touch = (AppiumBy.ACCESSIBILITY_ID, "touch!")
-    button_2 = (AppiumBy.ACCESSIBILITY_ID, "button_2")
-    text_edit = (AppiumBy.XPATH, "//android.widget.EditText")
-    check_box = (AppiumBy.XPATH, "//android.widget.CheckBox")
-    switch_button = (AppiumBy.XPATH, "//android.widget.Switch")
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.popup_close_button_locator = (AppiumBy.XPATH, "//android.webkit.WebView")
 
-    def click_button_1(self):
-        self.click(self.button_1)
-
-    def click_button_2(self):
-        self.click(self.button_2)
-
-    def input_text_edit(self, text: str):
-        self.click(self.text_edit)
-        self.send_keys(self.text_edit, text)
-
-    def click_check_box(self):
-        self.click(self.check_box)
-
-    def click_switch_button(self):
-        self.click(self.switch_button)
+    def close_popup_if_present(self):
+        try:
+            popup_close_button = self.get_element(self.popup_close_button_locator)
+            popup_close_button.click()
+        except:
+            pass

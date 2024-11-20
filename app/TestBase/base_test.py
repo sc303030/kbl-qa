@@ -11,7 +11,6 @@ load_dotenv()
 
 class BaseTest(unittest.TestCase):
     IMPLICIT_WAIT_TIME = 10
-    TIMEOUT = 30
 
     def setUp(self):
         desired_caps = {}
@@ -22,14 +21,14 @@ class BaseTest(unittest.TestCase):
             desired_caps["platformName"] = "Android"
             desired_caps["deviceName"] = "emulator-5554"
             desired_caps["automationName"] = "uiautomator2"
-            desired_caps["app"] = (
-                f"{os.path.dirname(os.path.dirname(BASE_DIR))}/{os.getenv('APP_DIR')}"
-            )
+            desired_caps["app"] = f"{os.getenv('APP_DIR')}"
+            desired_caps["autoGrantPermissions"] = True
+
         self.driver = webdriver.Remote(
             url, options=UiAutomator2Options().load_capabilities(desired_caps)
         )
+        self.driver.implicitly_wait(self.IMPLICIT_WAIT_TIME)
 
     def tearDown(self):
         if self.driver:
-            pass
-            # self.driver.quit()
+            self.driver.quit()
