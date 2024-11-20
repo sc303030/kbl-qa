@@ -25,8 +25,7 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(options=options)
         self.driver.start_client()
         self.driver.implicitly_wait(self.IMPLICIT_WAIT_TIME)
-        self.kbl_domain = self.KBL_DOMAIN
 
     def tearDown(self):
-        pass
-        # self.driver.quit()
+        if self.driver:
+            self.driver.quit()

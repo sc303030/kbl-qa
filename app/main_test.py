@@ -13,7 +13,7 @@ class TestMain(BaseTest):
     def test_홈_페이지_각종_버튼을_클릭한다(self):
         self.assert_button1_클릭하면_버튼_라벨이_touch_로_변경된다()
         self.home_page.click_button_2()
-        self.home_page.input_text_edit("오우! 테스트 자동화 개꿀!!")
+        self.home_page.input_text_edit("자동화 테스트")
         self.home_page.click_check_box()
         self.home_page.click_switch_button()
         time.sleep(5)

@@ -31,4 +31,5 @@ class BaseTest(unittest.TestCase):
 
     def tearDown(self):
         if self.driver:
-            self.driver.quit()
+            pass
+            # self.driver.quit()
