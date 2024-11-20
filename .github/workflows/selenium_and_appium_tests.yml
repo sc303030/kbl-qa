@@ -1,21 +1,29 @@
-name: Run Selenium Tests
+name: Run Selenium And Appium Tests
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  selenium-tests:
+  selenium-appium-tests:
     runs-on: ubuntu-latest
+
+    services:
+      appium:
+        image: appium/appium
+        ports:
+          - 4723:4723
+        options: --entrypoint=appium
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set environment variables
-        run: echo "ENV=production" >> $GITHUB_ENV
+        run: |
+          echo "ENV=production" >> $GITHUB_ENV
+          echo "APP_DIR=/app/Config/kbl.apk" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -37,7 +45,7 @@ jobs:
 
       - name: Setup ChromeDriver
         run: |
-          wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.69/linux64/chromedriver-linux64.zip
+          wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
           sudo mv ./chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
@@ -52,3 +60,7 @@ jobs:
         run: |
           mkdir -p /tmp/selenium/user-data-dir
           python -m unittest web/Tests/main_test.py
+
+      - name: Run Appium Tests
+        run: |
+          python -m unittest app/Tests/main_test.py
