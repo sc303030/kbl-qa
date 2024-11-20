@@ -51,4 +51,4 @@ jobs:
       - name: Run Selenium Tests
         run: |
           mkdir -p /tmp/selenium/user-data-dir
-          python -m unittest main_test.py
+          python -m unittest web/Tests/main_test.py
