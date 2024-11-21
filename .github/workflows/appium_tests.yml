@@ -30,9 +30,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Wait for Android Emulator
-        run: |
-          adb wait-for-device
-          adb shell input keyevent 82
+        uses: reactivecircus/android-emulator-runner@v2
 
       - name: Set environment variables
         run: |
