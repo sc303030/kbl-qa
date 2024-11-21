@@ -1,0 +1,53 @@
+name: Run Appium Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  appium-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      appium:
+        image: appium/appium
+        ports:
+          - 4723:4723
+        options: --entrypoint=appium
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Wait for Android Emulator
+        run: |
+          adb wait-for-device
+          adb shell input keyevent 82
+
+      - name: Set environment variables
+        run: |
+          echo "APP_DIR=/app/Config/kbl.apk" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r web/requirements.txt
+
+      - name: Run Appium Tests
+        run: |
+          python -m unittest mobile_tests/test_appium.py

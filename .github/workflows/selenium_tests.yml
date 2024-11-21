@@ -1,4 +1,4 @@
-name: Run Selenium And Appium Tests
+name: Run Selenium Tests
 
 on:
   push:
@@ -6,15 +6,8 @@ on:
       - main
 
 jobs:
-  selenium-appium-tests:
+  selenium-tests:
     runs-on: ubuntu-latest
-
-    services:
-      appium:
-        image: appium/appium
-        ports:
-          - 4723:4723
-        options: --entrypoint=appium
 
     steps:
       - name: Checkout repository
@@ -23,7 +16,6 @@ jobs:
       - name: Set environment variables
         run: |
           echo "ENV=production" >> $GITHUB_ENV
-          echo "APP_DIR=/app/Config/kbl.apk" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -60,7 +52,3 @@ jobs:
         run: |
           mkdir -p /tmp/selenium/user-data-dir
           python -m unittest web/Tests/main_test.py
-
-      - name: Run Appium Tests
-        run: |
-          python -m unittest app/Tests/main_test.py
