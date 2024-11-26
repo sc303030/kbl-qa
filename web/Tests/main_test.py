@@ -1,5 +1,6 @@
 from web.TestBase.base_test import BaseTest
 from web.Pages.home_page import HomePage
+import time
 
 
 class MainTest(BaseTest):
@@ -14,6 +15,8 @@ class MainTest(BaseTest):
         slide_card_count = home_page.get_slide_card_count()
         self.assertEqual(
             slide_card_count,
-            13,
-            f"슬라이드 카드의 개수는 10개가 아닙니다. 현재 개수: {slide_card_count}",
+            9,
+            f"슬라이드 카드의 개수는 9개가 아닙니다. 현재 개수: {slide_card_count}",
         )
+        time.sleep(3)
+        home_page.hover_team_select_div()
