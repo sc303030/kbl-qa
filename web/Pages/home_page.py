@@ -14,6 +14,11 @@ class HomePage(BasePage):
             '//*[@id="root"]/header/div[2]/div/div[2]/div',
         )
 
+        self.menus = (
+            By.XPATH,
+            '//*[@id="root"]/header/div[2]/div/div[2]/nav/ul/li/a',
+        )
+
     def verify_logo_present(self):
         logo = self.get_element(self.logo_locator)
         return logo is not None
@@ -26,3 +31,10 @@ class HomePage(BasePage):
 
     def hover_team_select_div(self):
         self.hover_on_element(self.team_select_div_xpath)
+
+    def get_text_and_memu_click(self, menu_txt: str):
+        elements = self.get_elements(self.menus)
+        for element in elements:
+            if element.text == menu_txt:
+                element.click()
+                break

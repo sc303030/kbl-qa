@@ -12,4 +12,4 @@ class MainTest(BaseTest):
             home_page.verify_logo_present(), "홈페이지 로고가 보이지 않습니다."
         )
 
-        home_page.hover_team_select_div()
+        home_page.get_text_and_memu_click("미디어")

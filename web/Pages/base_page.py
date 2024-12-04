@@ -10,9 +10,14 @@ class BasePage:
         self.driver = driver
         self.action = ActionChains(self.driver)
 
-    def get_element(self, by_locator: Tuple[str, str], timeout=10):
+    def get_element(self, locator: Tuple[str, str], timeout=10):
         return WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located(by_locator)
+            EC.visibility_of_element_located(locator)
+        )
+
+    def get_elements(self, locator: Tuple[str, str], timeout=20):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_all_elements_located(locator)
         )
 
     def click(self, locator):
