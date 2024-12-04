@@ -19,6 +19,11 @@ class BasePage:
             EC.visibility_of_element_located(locator)
         )
 
+    def get_elements(self, locator: Tuple[str, str], timeout: int = 10):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_all_elements_located(locator)
+        )
+
     def send_keys(self, locator: Tuple[str, str], text: str):
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(locator)

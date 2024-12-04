@@ -7,4 +7,4 @@ class MainTest(BaseTest):
         home_page = HomePage(self.driver)
 
         home_page.close_popup_if_present()
-        home_page.click_team_select_button()
+        home_page.click_schedules_version_button("default")
