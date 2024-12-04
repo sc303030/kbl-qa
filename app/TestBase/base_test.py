@@ -23,6 +23,7 @@ class BaseTest(unittest.TestCase):
             desired_caps["automationName"] = "uiautomator2"
             desired_caps["app"] = f"{os.getenv('APP_DIR')}"
             desired_caps["autoGrantPermissions"] = True
+            desired_caps["newCommandTimeout"] = 3600
 
         self.driver = webdriver.Remote(
             url, options=UiAutomator2Options().load_capabilities(desired_caps)
