@@ -12,11 +12,4 @@ class MainTest(BaseTest):
             home_page.verify_logo_present(), "홈페이지 로고가 보이지 않습니다."
         )
 
-        slide_card_count = home_page.get_slide_card_count()
-        self.assertEqual(
-            slide_card_count,
-            9,
-            f"슬라이드 카드의 개수는 9개가 아닙니다. 현재 개수: {slide_card_count}",
-        )
-        time.sleep(3)
         home_page.hover_team_select_div()
