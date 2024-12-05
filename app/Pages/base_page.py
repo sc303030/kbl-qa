@@ -24,7 +24,7 @@ class BasePage:
             EC.visibility_of_all_elements_located(locator)
         )
 
-    def send_keys(self, locator: Tuple[str, str], text: str):
-        WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator)
-        ).send_keys(text)
+    def enter_text(self, locator, text):
+        element = self.get_element(locator)
+        element.clear()
+        element.send_keys(text)
