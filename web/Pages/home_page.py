@@ -19,6 +19,16 @@ class HomePage(BasePage):
             '//*[@id="root"]/header/div[2]/div/div[2]/nav/ul/li/a',
         )
 
+        self.login_button = (
+            By.XPATH,
+            '//*[@id="root"]/header/div[2]/div/div[3]/button[2]',
+        )
+
+        self.id_input = (By.XPATH, '//*[@id="id"]')
+        self.password_input = (By.XPATH, '//*[@id="pwd"]')
+
+        self.login_confirm_button = (By.XPATH, '//*[@id="loginButton"]')
+
     def verify_logo_present(self):
         logo = self.get_element(self.logo_locator)
         return logo is not None
@@ -38,3 +48,9 @@ class HomePage(BasePage):
             if element.text == menu_txt:
                 element.click()
                 break
+
+    def login(self, email: str, password: str):
+        self.click(self.login_button)
+        self.enter_text(self.id_input, email)
+        self.enter_text(self.password_input, password)
+        self.click(self.login_confirm_button)
