@@ -39,6 +39,14 @@ class HomePage(BasePage):
             '//android.widget.Button[@resource-id="loginButton"]',
         )
 
+        self.tab_button = (
+            AppiumBy.XPATH,
+            '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.ImageView[1]',
+        )
+
+        self.event = (AppiumBy.XPATH, '//android.view.View[@content-desc="Event"]')
+        self.draw = (AppiumBy.XPATH, '//android.view.View[@content-desc="Draw"]')
+
     def close_popup_if_present(self):
         try:
             popup_close_button = self.get_element(self.popup_close_button_locator)
@@ -62,3 +70,8 @@ class HomePage(BasePage):
         self.enter_text(self.id_edit_text, email)
         self.enter_text(self.password_edit_text, password)
         self.click(self.login_confirm_button)
+
+    def click_draw(self):
+        self.click(self.tab_button)
+        self.click(self.event)
+        self.click(self.draw)
