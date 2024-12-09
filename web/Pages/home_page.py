@@ -54,3 +54,6 @@ class HomePage(BasePage):
         self.enter_text(self.id_input, email)
         self.enter_text(self.password_input, password)
         self.click(self.login_confirm_button)
+
+    def hover_after_mouse_move(self, x: int, y: int):
+        self.mouse_move(x, y)
