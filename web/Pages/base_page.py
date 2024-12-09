@@ -35,3 +35,6 @@ class BasePage:
     def hover_on_element(self, locator):
         element = self.get_element(locator)
         self.action.move_to_element(element).perform()
+
+    def mouse_move(self, x: int, y: int):
+        self.action.move_by_offset(x, y).perform()
