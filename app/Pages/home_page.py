@@ -44,6 +44,11 @@ class HomePage(BasePage):
             '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.ImageView[1]',
         )
 
+        self.menu_button = (
+            AppiumBy.XPATH,
+            '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View',
+        )
+
         self.event = (AppiumBy.XPATH, '//android.view.View[@content-desc="Event"]')
         self.draw = (AppiumBy.XPATH, '//android.view.View[@content-desc="Draw"]')
 
@@ -71,7 +76,17 @@ class HomePage(BasePage):
         self.enter_text(self.password_edit_text, password)
         self.click(self.login_confirm_button)
 
-    def click_draw(self):
+    def click_tab(self):
         self.click(self.tab_button)
+
+    def click_menu(self, menu_name: str):
+        elements = self.get_elements(self.menu_button)
+        for element in elements:
+            content_desc = element.get_attribute("content-desc")
+            if content_desc == menu_name:
+                element.click()
+                break
+
+    def click_draw(self):
         self.click(self.event)
         self.click(self.draw)
