@@ -6,16 +6,15 @@ from web_Playwright.Pages.home_page import HomePage
 from web_Playwright.Pages.draw_page import DrawPage
 from dotenv import load_dotenv
 
+from web_Playwright.Pages.record_page import RecordPage
+
 load_dotenv()
 
 
 def test_login_success(page: Page):
-    login_page = HomePage(page)
-    draw_page = DrawPage(page)
-    login_page.goto("https://kbl.or.kr/")
-    email = os.getenv("EMAIL")
-    password = os.getenv("PASSWORD")
-    login_page.login(email, password)
-    login_page.click_draw()
-    draw_page.select_draw("KBL DRAW 92")
-    draw_page.participate_draw()
+    home_page = HomePage(page)
+    record_page = RecordPage(page)
+    home_page.goto("https://kbl.or.kr/")
+
+    home_page.click_menu("link", "기록")
+    record_page.click_sub_menu("link", "팀기록")

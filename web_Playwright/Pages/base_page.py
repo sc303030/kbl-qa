@@ -29,7 +29,7 @@ class BasePage:
         )
 
     def get_element_by_role(self, role: str, name: str):
-        return self.page.get_by_role(role, name=name)
+        return self.page.get_by_role(role, name=name, exact=True)
 
     def get_element_by_placeholder(self, name: str):
         return self.page.get_by_placeholder(name)
@@ -56,3 +56,6 @@ class BasePage:
 
     def select_element_by_text(self, tag: str, text: str):
         return self.page.locator(tag).filter(has_text=text)
+
+    def mouse_move(self, x: int, y: int):
+        self.page.mouse.move(x, y)
