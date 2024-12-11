@@ -43,11 +43,7 @@ class HomePage(BasePage):
         self.hover_on_element(self.team_select_div_xpath)
 
     def get_text_and_memu_click(self, menu_txt: str):
-        elements = self.get_elements(self.menus)
-        for element in elements:
-            if element.text == menu_txt:
-                element.click()
-                break
+        self.click_menu(self.menus, menu_txt)
 
     def login(self, email: str, password: str):
         self.click(self.login_button)

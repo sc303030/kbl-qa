@@ -7,9 +7,5 @@ class RecordPage(BasePage):
         super().__init__(driver)
         self.record_category = (By.XPATH, '//*[@id="root"]/header/div[3]/div/ul/li/a')
 
-    def click_record_category(self, category_name: str):
-        elements = self.get_elements(self.record_category)
-        for element in elements:
-            if element.text == category_name:
-                element.click()
-                break
+    def click_record_category(self, menu_txt: str):
+        self.click_menu(self.record_category, menu_txt)

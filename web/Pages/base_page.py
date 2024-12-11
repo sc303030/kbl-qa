@@ -38,3 +38,10 @@ class BasePage:
 
     def mouse_move(self, x: int, y: int):
         self.action.move_by_offset(x, y).perform()
+
+    def click_menu(self, menus: Tuple[str, str], menu_name: str):
+        elements = self.get_elements(menus)
+        for element in elements:
+            if element.text == menu_name:
+                element.click()
+                break
