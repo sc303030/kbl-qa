@@ -63,3 +63,11 @@ class BasePage:
 
         # 동작 실행
         actions.perform()
+
+    def click_menu(self, locator: Tuple[str, str], menu_name: str):
+        elements = self.get_elements(locator)
+        for element in elements:
+            content_desc = element.get_attribute("content-desc")
+            if content_desc == menu_name:
+                element.click()
+                break

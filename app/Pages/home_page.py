@@ -51,6 +51,10 @@ class HomePage(BasePage):
 
         self.event = (AppiumBy.XPATH, '//android.view.View[@content-desc="Event"]')
         self.draw = (AppiumBy.XPATH, '//android.view.View[@content-desc="Draw"]')
+        self.language = (
+            AppiumBy.XPATH,
+            '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.ImageView[3]',
+        )
 
     def close_popup_if_present(self):
         try:
@@ -79,14 +83,12 @@ class HomePage(BasePage):
     def click_tab(self):
         self.click(self.tab_button)
 
-    def click_menu(self, menu_name: str):
-        elements = self.get_elements(self.menu_button)
-        for element in elements:
-            content_desc = element.get_attribute("content-desc")
-            if content_desc == menu_name:
-                element.click()
-                break
+    def click_tab_menu(self, menu_name: str):
+        self.click_menu(self.menu_button, menu_name)
 
     def click_draw(self):
         self.click(self.event)
         self.click(self.draw)
+
+    def change_language(self):
+        self.click(self.language)

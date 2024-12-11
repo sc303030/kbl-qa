@@ -11,9 +11,4 @@ class RecordPage(BasePage):
         )
 
     def click_sub_menu(self, sub_menu_name: str):
-        elements = self.get_elements(self.sub_menu)
-        for element in elements:
-            content_desc = element.get_attribute("content-desc")
-            if content_desc == sub_menu_name:
-                element.click()
-                break
+        self.click_menu(self.sub_menu, sub_menu_name)
