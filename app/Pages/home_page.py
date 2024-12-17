@@ -80,6 +80,9 @@ class HomePage(BasePage):
         self.enter_text(self.password_edit_text, password)
         self.click(self.login_confirm_button)
 
+    def click_user_button(self):
+        self.click(self.user_icon)
+
     def click_tab(self):
         self.click(self.tab_button)
 
