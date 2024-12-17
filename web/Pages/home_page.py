@@ -19,7 +19,7 @@ class HomePage(BasePage):
             '//*[@id="root"]/header/div[2]/div/div[2]/nav/ul/li/a',
         )
 
-        self.login_button = (
+        self.login_logout_button = (
             By.XPATH,
             '//*[@id="root"]/header/div[2]/div/div[3]/button[2]',
         )
@@ -46,10 +46,15 @@ class HomePage(BasePage):
         self.click_menu(self.menus, menu_txt)
 
     def login(self, email: str, password: str):
-        self.click(self.login_button)
+        self.click(self.login_logout_button)
         self.enter_text(self.id_input, email)
         self.enter_text(self.password_input, password)
         self.click(self.login_confirm_button)
+
+    def verify_logout_button(self):
+        logout_button = self.get_element(self.login_logout_button)
+        print(logout_button.text)
+        return logout_button.text == "로그아웃"
 
     def hover_after_mouse_move(self, x: int, y: int):
         self.mouse_move(x, y)
