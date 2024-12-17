@@ -53,7 +53,6 @@ class HomePage(BasePage):
 
     def verify_logout_button(self):
         logout_button = self.get_element(self.login_logout_button)
-        print(logout_button.text)
         return logout_button.text == "로그아웃"
 
     def hover_after_mouse_move(self, x: int, y: int):
